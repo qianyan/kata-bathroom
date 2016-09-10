@@ -46,4 +46,8 @@
     (the-earliest-available-recommand [room-1 room-2]) => {:room-id 1 :time "17:00-18:00"}
     (the-earliest-available-recommand [room-2 room-1]) => {:room-id 1 :time "17:00-18:00"}
     (the-earliest-available-recommand [room-2 room-3]) => {:room-id 2 :time "18:00-19:00"}
-    (the-earliest-available-recommand [room-1 room-2 room-3]) => {:room-id 1 :time "17:00-18:00"}))
+    (the-earliest-available-recommand [room-1 room-2 room-3]) => {:room-id 1 :time "17:00-18:00"})
+  
+  (fact "should recommand the earliest available room even if there has non available room"
+    (the-earliest-available-recommand [room-1 non-available-room]) => {:room-id 1 :time "17:00-18:00"}
+    (the-earliest-available-recommand [room-2 non-available-room]) => {:room-id 2 :time "18:00-19:00"}))
