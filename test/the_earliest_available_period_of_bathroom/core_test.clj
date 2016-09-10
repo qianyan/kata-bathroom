@@ -29,7 +29,7 @@
                         :status :occupied}
                        {:time "19:00-20:00"
                         :status :occupied}]})
-
+  
 (facts "about `the-earliest-avaible-period-of-bathroom`"
   (fact "should recommand the available if there is only one room with one available period"
     (the-earliest-available-recommand [room-1]) => {:room-id 1 :time "17:00-18:00"}
@@ -40,4 +40,10 @@
   
   (fact "should show `:no-available-room` if there is no available room"
     (the-earliest-available-recommand []) => :no-available-room
-    (the-earliest-available-recommand [non-available-room]) => :no-available-room))
+    (the-earliest-available-recommand [non-available-room]) => :no-available-room)
+  
+  (fact "should recommand the earliest if there has more than one room and each has available periods"
+    (the-earliest-available-recommand [room-1 room-2]) => {:room-id 1 :time "17:00-18:00"}
+    (the-earliest-available-recommand [room-2 room-1]) => {:room-id 1 :time "17:00-18:00"}
+    (the-earliest-available-recommand [room-2 room-3]) => {:room-id 2 :time "18:00-19:00"}
+    (the-earliest-available-recommand [room-1 room-2 room-3]) => {:room-id 1 :time "17:00-18:00"}))
