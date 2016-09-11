@@ -4,7 +4,7 @@
 
 `lein midje` will run all tests.
 
-`lein midje namespace.*` will run only tests beginning with "namespace.".
+`lein midje the-earliest-available-period-of-bath.*` will run only tests beginning within this namespace.
 
 `lein midje :autotest` will run all the tests indefinitely. It sets up a
 watcher on the code files. If they change, only the relevant tests will be
@@ -51,10 +51,12 @@ rooms: [
   time: '17:00-18:00'
 }
 ```
+## 假设
+* periods中的时间段是从低到高排序的
 
 ## Tasking（拆分任务）
 - [x] 单间澡堂有一个可用时间段
-- [x] 单间澡堂用多个可用时间段
+- [x] 单间澡堂有多个可用时间段
 - [x] 所有澡堂（包含输入为空）没有可用时间
 - [x] 多间澡堂都有可用时间段
 - [x] 多间澡堂中有的有可用时间段，有得没有可用时间段
