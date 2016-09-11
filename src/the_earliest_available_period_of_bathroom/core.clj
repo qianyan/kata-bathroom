@@ -3,13 +3,13 @@
 (defn the-earliest-available-recommand [rooms]
   (letfn [(period [{:keys [periods]}]
             (-> periods
-                (->> (filter #(#{:available} (:status %)))
-                     ffirst)
+                (->> (filter #(#{:available} (:status %))))
+                (ffirst)
                 (or [:time ::non-available])))]
     (-> rooms
-        (->> (map (fn [room]
-                    (apply conj {} ((juxt first period) room))))
+        (->> (map (juxt first period))
+             (map #(into {} %))
              (remove #(#{::non-available} (:time %)))
              (sort-by :time)
-             first)
+             (first))
         (or :no-available-room))))
