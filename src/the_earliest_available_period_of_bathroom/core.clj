@@ -4,12 +4,12 @@
   (letfn [(period [{:keys [periods]}]
             (-> periods
                 (->> (filter #(#{:available} (:status %))))
-                (ffirst)
-                (or [:time ::non-available])))]
+                (first)
+                (select-keys [:time])))]
     (-> rooms
         (->> (map (juxt first period))
              (map #(into {} %))
-             (remove #(#{::non-available} (:time %)))
+             (remove (complement :time))
              (sort-by :time)
              (first))
         (or :no-available-room))))
